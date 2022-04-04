@@ -6,9 +6,12 @@ module.exports = (app) => {
     app.get('/', async(req, res) =>{
         conexao()
         var mygrid = require('../models/mygrid')
+        var gallery = require('../models/gallery')
         //colocar, ou tirar o // do comentario depois do find()para filtrar o mygrid
-        var documentos = await mygrid.find()//.limit(3).sort({'_id':-1})
-        res.render('index.ejs', {dados:documentos})
+        var documentos = await mygrid.find().limit(3).sort({'_id':-1})
+        var imagens = await gallery.find().limit(6).sort({'_id':-1})
+        res.render('index.ejs', {dados:documentos,img:imagens})
+        
     })
 
 
